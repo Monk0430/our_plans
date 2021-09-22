@@ -2,12 +2,15 @@ package ru.firstTry.bot;
 
 public class Main {
     public static void main(String[] args){
-
+        System.out.println(getHelloMessage("User"));
         Input input = new Input();
         Processing command = new Processing();
         OutPut output = new OutPut();
         String str = input.readLn();
         String comm = command.processing(str);
         output.writeln(comm);
+    }
+    public static String getHelloMessage(String name) {
+        return "Hello, " + name + "!";
     }
 }
