@@ -2,8 +2,9 @@ package ru.firstTry.bot;
 
 public class Main {
     public static void main(String[] args){
-        System.out.println("Hello, World!");
-        Input str = new Input();
-        str.readln();
+
+        Input input = new Input();
+        String command = input.readLn();
+
     }
 }

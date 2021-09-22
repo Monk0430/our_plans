@@ -4,14 +4,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Processing {
-    public Map Dict;
-    public  Processing() {
-        Dict = new HashMap();
-        Dict.put("-help", "list of bot commands:\n" +
-                "-weather\n" +
-                "-anecdote");
-        Dict.put("-weather", "it's not working yet :c");
-        Dict.put("-anecdote", "haha");
-    }
+    public String Processing(String command) {
+        switch (command) {
+            case "-help":
+                return "-weather - показывает погоду в Екатеринбурге.\n-anecdote - показывает рандомный анекдот.";
+            case "-weather":
+                // Code
 
+                return "14";
+            case "-anecdote":
+                // Code
+                return "Anecdote";
+            default:
+                return "Неизвестная комманда.";
+        }
+    }
 }

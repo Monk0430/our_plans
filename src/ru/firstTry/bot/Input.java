@@ -4,14 +4,9 @@ import java.util.Scanner;
 
 public class Input {
 
-    public  String text;
-    public  Input(){
-        this.text = text;
+    public String readLn(){
+        Scanner sc = new Scanner(System.in);
+        return sc.next();
     }
 
-    public void readln(){
-        Scanner sc = new Scanner(System.in);
-        text = sc.next();
-        System.out.println(text);
-    }
 }
