@@ -4,7 +4,10 @@ public class Main {
     public static void main(String[] args){
 
         Input input = new Input();
-        String command = input.readLn();
-
+        Processing command = new Processing();
+        OutPut output = new OutPut();
+        String str = input.readLn();
+        String comm = command.processing(str);
+        output.writeln(comm);
     }
 }
