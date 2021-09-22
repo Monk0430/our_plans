@@ -1,8 +1,9 @@
 package ru.firstTry.bot;
 
-public class Main {
-    public static void main(String[] args){
+import java.io.IOException;
 
+public class Main {
+    public static void main(String[] args) throws IOException {
         Input input = new Input();
         Processing command = new Processing();
         OutPut output = new OutPut();
