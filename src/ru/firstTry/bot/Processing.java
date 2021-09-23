@@ -9,13 +9,19 @@ public class Processing {
     public String processing(String command) throws IOException{
         switch (command) {
             case "-help":
-                return "-weather - показывает погоду в Екатеринбурге.\n-anecdote - показывает рандомный анекдот.";
+                return """
+                        -weather - показывает погоду в Екатеринбурге.
+                        -anecdote - показывает рандомный анекдот.
+                        -exit - завершить сеанс""";
             case "-weather":
                 int temp = get_weather();
                 return "Температура в Ектеринбурге: " + temp + "°С";
             case "-anecdote":
                 // Code
                 return "Колобок повесился.";
+            case "-exit":
+                // Code
+                return "Пока.";
             default:
                 return "Неизвестная комманда.";
         }

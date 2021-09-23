@@ -8,9 +8,12 @@ public class Main {
         Input input = new Input();
         Processing command = new Processing();
         OutPut output = new OutPut();
-        String str = input.readLn();
-        String comm = command.processing(str);
-        output.writeln(comm);
+        String str = "";
+        while (!str.equals("-exit")){
+            str = input.readLn();
+            String comm = command.processing(str);
+            output.writeln(comm);
+        }
     }
     public static String getHelloMessage(String name){
         return "Hello, " + name + "!";
