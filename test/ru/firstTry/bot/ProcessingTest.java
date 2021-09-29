@@ -20,7 +20,7 @@ class ProcessingTest {
 //        String comm = command.processing("-weather");
 //        assertEquals("14", comm);
 //    }
-
+//
 //    @Test
 //    public void test4() throws IOException {
 //        Processor command = new Processor();
