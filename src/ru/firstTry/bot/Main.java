@@ -4,18 +4,14 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        System.out.println(getHelloMessage("User"));
-        Input input = new Input();
-        Processing command = new Processing();
-        OutPut output = new OutPut();
-        String str = "";
-        while (!str.equals("-exit")){
-            str = input.readLn();
-            String comm = command.processing(str);
-            output.writeln(comm);
-        }
-    }
-    public static String getHelloMessage(String name){
-        return "Hello, " + name + "!";
+        Console console = new Console();
+        console.print('\n', "Привет.");
+        Processor processor = new Processor();
+        String command;
+
+        do {
+            command = console.input();
+            processor.processing(command);
+        } while (!command.equals("-exit"));
     }
 }
