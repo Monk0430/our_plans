@@ -1,9 +1,7 @@
 package ru.firstTry.bot;
 
-import java.io.IOException;
-
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Console console = new Console();
         console.print('\n', "Привет.");
         Processor processor = new Processor();

@@ -1,10 +1,8 @@
 package ru.firstTry.bot;
 
-import java.io.IOException;
-
 public class Processor {
 
-    public void processing(String command) throws IOException {
+    public void processing(String command) {
         Console console = new Console();
 
         switch (command) {

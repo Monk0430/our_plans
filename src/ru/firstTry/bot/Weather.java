@@ -9,7 +9,8 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class Weather {
-    public static int get_weather() throws IOException {
+
+    public static int get_weather() {
         String url = "https://api.openweathermap.org/data/2.5/weather?" +
                 "q=Ekaterinburg" +
                 "&utils=metric" +
@@ -17,21 +18,24 @@ public class Weather {
         String data = get(url);
         JSONObject obj = new JSONObject(data);
         return (int) (obj.getJSONObject("main").getDouble("temp") - 273.15);
-
     }
 
-    private static String get(String link) throws IOException {
-        URL url = new URL(link);
-        URLConnection yc = url.openConnection();
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(yc.getInputStream())
-        );
-        String inputLine;
-        String result = "";
-
-        while ((inputLine = in.readLine()) != null)
-            result = inputLine;
-        in.close();
+    private static String get(String link) {
+        String result = "{}";
+        try {
+            URL url = new URL(link);
+            URLConnection yc = url.openConnection();
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(yc.getInputStream())
+            );
+            String inputLine;
+            while ((inputLine = in.readLine()) != null)
+                result = inputLine;
+            in.close();
+        } catch (IOException e){
+            System.out.println(e.getMessage());
+        }
         return result;
     }
+
 }
