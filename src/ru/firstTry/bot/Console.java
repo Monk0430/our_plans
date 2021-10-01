@@ -3,10 +3,10 @@ package ru.firstTry.bot;
 import java.util.Scanner;
 
 public class Console {
+    private final Scanner sc = new Scanner(System.in);
 
     public String input() {
-        Scanner sc = new Scanner(System.in);
-        return sc.next();
+        return new BotRequest(sc.next());
     }
 
     /**
