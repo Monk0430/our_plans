@@ -2,6 +2,7 @@ package ru.firstTry.bot;
 
 public class Main {
     public static void main(String[] args) {
+
         Console console = new Console();
         console.print('\n', "Привет.");
         Processor processor = new Processor();
@@ -11,5 +12,6 @@ public class Main {
             command = console.input();
             processor.processing(command);
         } while (!command.getInput().equals("-exit"));
+
     }
 }
