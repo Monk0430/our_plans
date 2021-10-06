@@ -2,10 +2,10 @@ package ru.firstTry.bot;
 
 public class Processor {
 
-    public void processing(String command) {
+    public void processing(BotRequest command) {
         Console console = new Console();
 
-        switch (command) {
+        switch (command.getInput()) {
             case "-help" -> console.print(
                     '\n',
                     "-weather - показывает погоду в Екатеринбурге.",
@@ -13,7 +13,7 @@ public class Processor {
                     "-exit - завершить сеанс."
             );
             case "-weather" -> {
-                int temp = Weather.get_weather();
+                int temp = WeatherAPI.get_weather();
                 console.print("Температура в Ектеринбурге:", "" + temp, "°С");
             }
             case "-anecdote" -> console.print("Колобок повесился.");

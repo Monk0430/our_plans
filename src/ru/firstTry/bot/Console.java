@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Console {
     private final Scanner sc = new Scanner(System.in);
 
-    public String input() {
+    public BotRequest input() {
         return new BotRequest(sc.next());
     }
 

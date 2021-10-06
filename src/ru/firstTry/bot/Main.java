@@ -5,11 +5,11 @@ public class Main {
         Console console = new Console();
         console.print('\n', "Привет.");
         Processor processor = new Processor();
-        String command;
+        BotRequest command;
 
         do {
             command = console.input();
             processor.processing(command);
-        } while (!command.equals("-exit"));
+        } while (!command.getInput().equals("-exit"));
     }
 }
