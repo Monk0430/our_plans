@@ -11,5 +11,6 @@ public class Main {
             command = console.input();
             processor.processing(command);
         } while (!command.equals("-exit"));
+
     }
 }

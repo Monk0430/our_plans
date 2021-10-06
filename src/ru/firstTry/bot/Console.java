@@ -22,7 +22,7 @@ public class Console {
      * @param texts - аргументы для вывода текста
      */
     public void print(char sup, String ... texts) {
+
         for (String text : texts) System.out.print("" + text + sup);
     }
-
 }
