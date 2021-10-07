@@ -1,4 +1,4 @@
-package ru.firstTry.bot;
+/*package ru.firstTry.bot;
 
 import com.pengrad.telegrambot.TelegramBot;
 
@@ -8,3 +8,4 @@ public class TelegramAPI {
     public static void SendMessage(int chatId, String text) {
     }
 }
+*/

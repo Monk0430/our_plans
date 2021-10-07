@@ -10,7 +10,7 @@ public class Game {
         for (int i = 0; i < 2; i++) {
             hand.add(deck.DrawCard());
         }
-        showHand();
+        //showHand();
     }
 
     public void play(Deck deck, String command) {
