@@ -13,8 +13,8 @@ public class Game {
         //showHand();
     }
 
-    public void play(Deck deck, String command) {
-        switch (command) {
+    public void play(Deck deck, BotRequest command) {
+        switch (command.getInput()) {
             case "посмотреть руку":
                 showHand();
                 break;

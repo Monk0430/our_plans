@@ -6,7 +6,7 @@ public class Console {
     private final Scanner sc = new Scanner(System.in);
 
     public BotRequest input() {
-        return new BotRequest(sc.next());
+        return new BotRequest(sc.nextLine());
     }
 
     /**

@@ -8,13 +8,23 @@ public class Main {
         console.print('\n', "Привет.");
         Processor processor = new Processor();
         BotRequest command;
+        BotRequest commandForGame;
+        boolean flag = false;
 
         do {
             command = console.input();
             String str =  processor.processing(command);
             if(str.equals("go"))
             {
-                newGame.play(deck, command.getInput());
+                console.print("да начнётся игра");
+                commandForGame = console.input();
+                command = null;
+                while(!commandForGame.getInput().equals("stop")){
+                    if(flag)
+                        commandForGame = console.input();
+                    newGame.play(deck,commandForGame);
+                    flag = true;
+                }
             }
             else
             console.print(str);
