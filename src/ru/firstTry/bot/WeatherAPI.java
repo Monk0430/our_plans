@@ -5,11 +5,12 @@ import org.json.JSONObject;
 public class WeatherAPI {
 
     public static int get_weather() {
+        Requests requests = new Requests();
         String url = "https://api.openweathermap.org/data/2.5/weather?" +
                 "q=Ekaterinburg" +
                 "&utils=metric" +
-                "&appid=" + Config.WeatherToken;
-        String data = Requests.get(url);
+                "&appid=" + Config.getWeatherToken();
+        String data = requests.get(url);
         JSONObject obj = new JSONObject(data);
         return (int) (obj.getJSONObject("main").getDouble("temp") - 273.15);
     }

@@ -13,6 +13,7 @@ public class Deck {
             }
         }
     }
+
     public Cards DrawCard(){
         int rnd = (int)(Math.random() * deck.size());
         Cards card = deck.get(rnd);

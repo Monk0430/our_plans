@@ -1,11 +1,17 @@
-/*package ru.firstTry.bot;
+package ru.firstTry.bot;
 
-import com.pengrad.telegrambot.TelegramBot;
+import org.json.JSONObject;
 
 public class TelegramAPI {
-    private static final TelegramBot bot = new TelegramBot(Config.BotToken);
+    private static final String apiUrl = "https://api.telegram.org/bot" + Config.getBotToken() + "/";
+    private final Requests requests = new Requests();
 
-    public static void SendMessage(int chatId, String text) {
+    public JSONObject getUpdates(int offset) {
+        String data = requests.get(apiUrl + "getUpdates?offset=" + offset);
+        return new JSONObject(data);
+    }
+
+    public void sendMessage(int chatId, String text) {
+        requests.get(apiUrl + "sendMessage?chat_id=" + chatId + "&text=" + text);
     }
 }
-*/
