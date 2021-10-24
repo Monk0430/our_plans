@@ -1,7 +1,8 @@
 package ru.firstTry.bot;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 public class Main {
     public static void main(String[] args) {
@@ -33,25 +34,11 @@ public class Main {
 //            console.print(str);
 //        } while (!command.getInput().equals("-exit"));
 
-        Processor processor = new Processor();
-        TelegramAPI bot = new TelegramAPI();
-        int updateId = 0;
-
-        while (true) {
-            JSONObject data = bot.getUpdates(updateId + 1);
-            if (data.getBoolean("ok")){
-
-                JSONArray results = data.getJSONArray("result");
-                for(Object result : results) {
-                    JSONObject update = new JSONObject(result.toString());
-                    System.out.println(update);
-                    updateId = update.getInt("update_id");
-                    int chatId = update.getJSONObject("message").getJSONObject("chat").getInt("id");
-                    String text = update.getJSONObject("message").getString("text");
-                    bot.sendMessage(chatId, processor.processing(text));
-                }
-
-            }
+        try {
+            TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
+            botsApi.registerBot(new Handler());
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
         }
 
 

@@ -31,11 +31,11 @@
             <artifactId>json</artifactId>
             <version>20190722</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.github.pengrad/java-telegram-bot-api -->
+        <!-- https://mvnrepository.com/artifact/org.telegram/telegrambots -->
         <dependency>
-            <groupId>com.github.pengrad</groupId>
-            <artifactId>java-telegram-bot-api</artifactId>
-            <version>5.2.0</version>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots</artifactId>
+            <version>5.3.0</version>
         </dependency>
     </dependencies>
 
