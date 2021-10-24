@@ -31,7 +31,6 @@
             <artifactId>json</artifactId>
             <version>20190722</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.telegram/telegrambots -->
         <dependency>
             <groupId>org.telegram</groupId>
             <artifactId>telegrambots</artifactId>
