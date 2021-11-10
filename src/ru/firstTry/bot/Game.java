@@ -13,41 +13,38 @@ public class Game {
         //showHand();
     }
 
-    public void play(Deck deck, BotRequest command) {
-        switch (command.getInput()) {
+    public String play(Deck deck,String command) {
+        switch (command) {
             case "посмотреть руку":
-                showHand();
-                break;
+                return showHand();
             case "взять карту":
                 Cards drewCard = deck.DrawCard();
-                System.out.println(drewCard.nameOfCard());
                 hand.add(drewCard);
-                break;
-            case "хватит":
-                Scoring();
-                break;
+                return drewCard.nameOfCard();
+            case "хватит" :
+                return Scoring();
             default:
-                System.out.println("неопознанная команда");
-                break;
+                return "null";
         }
     }
 
 
-    public void showHand(){
-        System.out.println("у вас на руке :");
+    public String showHand(){
+        String str = "\n";
         for(Cards card : hand){
-            System.out.println(card.nameOfCard());
+            str += (card.nameOfCard() + "\n");
         }
+        return "у вас на руке: " + str;
     }
-    public void Scoring(){
+    public String Scoring(){
         int value = 0;
         for(Cards card : hand){
             value += card.getRank() +3;
         }
         if(value >21)
-            System.out.println("вы проиграли");
+            return "вы проиграли";
         else
-            System.out.println(value);
+            return  String.valueOf(value);
     }
 }
 

@@ -1,8 +1,18 @@
 package ru.firstTry.bot;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Deck {
-    private final ArrayList<Cards> deck;
+    private ArrayList<Cards> deck;
+    /*Deck deck = new Deck();
+    Game newGame = new Game(deck);
+    Scanner sc = new Scanner(System.in);
+    while(true){
+        String command = sc.nextLine();
+        newGame.play(deck, command);
+        if(command.equals("стоп"))
+            break;
+    }*/
 
     public Deck()
     {

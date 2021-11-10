@@ -14,14 +14,27 @@ public class Keyboards {
         rowList.add(getButton("Анекдот", "anecdote"));
         rowList.add(getButton("Играть", "play"));
         inlineKeyboardMarkup.setKeyboard(rowList);
+
+        return inlineKeyboardMarkup;
+    }
+    public static InlineKeyboardMarkup getStartGameKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> gameList = new ArrayList<>();
+        gameList.add(getButton("посмотреть руку", "hand"));
+        gameList.add(getButton("взять карту", "take"));
+        gameList.add(getButton("вскрываемся", "result"));
+        inlineKeyboardMarkup.setKeyboard(gameList);
         return inlineKeyboardMarkup;
     }
 
     public static InlineKeyboardMarkup getBackKeyboard(String callBack) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
+        List<List<InlineKeyboardButton>> gameList = new ArrayList<>();
         rowList.add(getBackButton(callBack));
+        gameList.add(getBackButton(callBack));
         inlineKeyboardMarkup.setKeyboard(rowList);
+        inlineKeyboardMarkup.setKeyboard(gameList);
         return inlineKeyboardMarkup;
     }
 

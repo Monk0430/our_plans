@@ -6,15 +6,10 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 public class Main {
     public static void main(String[] args) {
-//        Deck deck = new Deck();
-//        Game newGame = new Game(deck);
-//        Console console = new Console();
-//        console.print('\n', "Привет.");
-//        Processor processor = new Processor();
-//        BotRequest command;
-//        BotRequest commandForGame;
-//        boolean flag = false;
-//
+        //Deck deck = new Deck();
+        //Game newGame = new Game(deck);
+        //BotRequest command;
+        //newGame.play(deck,command);
 //        do {
 //            command = console.input();
 //            String str =  processor.processing(command);

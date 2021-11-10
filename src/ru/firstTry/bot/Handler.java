@@ -8,10 +8,16 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class Handler extends TelegramLongPollingBot {
+    Deck deck = new Deck();
+    Game newGame = new Game(deck);
 
     @Override
     public String getBotUsername() {
         return Config.getBotUsername();
+    }
+    @Override
+    public String getBotToken() {
+        return Config.getBotToken();
     }
 
     @Override
@@ -57,6 +63,24 @@ public class Handler extends TelegramLongPollingBot {
                     message.setText("<b>Колобок повесился</b>");
                     message.setReplyMarkup(Keyboards.getBackKeyboard("start"));
                 }
+                case "play" -> {
+                    newGame.showHand();
+                    message.setText("<b>сыграем</b>");
+                    message.setReplyMarkup(Keyboards.getStartGameKeyboard());
+                }
+                case "hand" -> {
+                    message.setText(newGame.play(deck,"посмотреть руку"));
+                    message.setReplyMarkup(Keyboards.getBackKeyboard("play"));
+                }
+                case "take" -> {
+                    message.setText(newGame.play(deck,"взять карту"));
+                    message.setReplyMarkup(Keyboards.getBackKeyboard("play"));
+                } case "result" -> {
+                    message.setText(newGame.play(deck,"хватит"));
+                    deck = new Deck();
+                    newGame = new Game(deck);
+                    message.setReplyMarkup(Keyboards.getBackKeyboard("start"));
+                }
                 default -> {
                     answer.setCallbackQueryId(update.getCallbackQuery().getId());
                     answer.setText("⚠️ Эту функцию еще не завезли ⚠️");
@@ -79,10 +103,6 @@ public class Handler extends TelegramLongPollingBot {
         }
     }
 
-    @Override
-    public String getBotToken() {
-        return Config.getBotToken();
-    }
 
 
 
