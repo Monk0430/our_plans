@@ -1,12 +1,16 @@
 package ru.firstTry.bot;
 
-import java.lang.reflect.Array;
+import org.javatuples.Pair;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import ru.firstTry.bot.Creators.AnectodesCreator;
+import ru.firstTry.bot.Creators.StartCreator;
+import ru.firstTry.bot.Creators.Treatment;
+import ru.firstTry.bot.Creators.WeatherCreator;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
-import org.telegram.telegrambots.meta.api.objects.Update;
 ;
 
 public class Unifer {
@@ -16,16 +20,15 @@ public class Unifer {
     public Unifer(){
         list = new ArrayList<>();
         list.add(new AnectodesCreator());
-        list.add(new Weather());
+        list.add(new WeatherCreator());
+        list.add(new StartCreator());
     }
-    public String[] handleUpdate(Update update) {
-        String[] arr = new String[2];
+
+    public Pair<String, InlineKeyboardMarkup> handleUpdate(Update update) {
         String data = update.getCallbackQuery().getData();
         for (Treatment p : list)
             if (p.isPossible(data)) {
-                arr[0] = p.messageHandling(data);
-                arr[1] = "start";
-                return arr;
+                return p.messageHandling(data);
             }
         return null;
     }

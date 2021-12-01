@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Game {
 
-    private ArrayList<Cards> hand;
-    public Game(Deck deck){
+    private final ArrayList<Cards> hand;
+    public Game(Deck deck) {
         hand = new ArrayList<Cards>();
         for (int i = 0; i < 2; i++) {
             hand.add(deck.DrawCard());

@@ -16,7 +16,7 @@ public class DBHandler {
         return instance;
     }
 
-    private Connection connection;
+    private final Connection connection;
 
     private DBHandler() throws SQLException {
         DriverManager.registerDriver(new JDBC());

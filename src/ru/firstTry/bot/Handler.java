@@ -1,13 +1,14 @@
 package ru.firstTry.bot;
 
+import org.javatuples.Pair;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.sql.Array;
 import java.sql.SQLException;
 
 public class Handler extends TelegramLongPollingBot {
@@ -63,9 +64,9 @@ public class Handler extends TelegramLongPollingBot {
             message.setMessageId(messageId);
             message.setParseMode("HTML");
 
-            String[] str =unifer.handleUpdate(update);
-            message.setText(str[0]);
-            message.setReplyMarkup(Keyboards.getBackKeyboard(str[1]));
+            Pair<String, InlineKeyboardMarkup> creator = unifer.handleUpdate(update);
+            message.setText(creator.getValue0());
+            message.setReplyMarkup(creator.getValue1());
             try {
                 if (answer.getText() != null)
                     execute(answer);

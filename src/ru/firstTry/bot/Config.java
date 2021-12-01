@@ -9,7 +9,7 @@ public class Config {
         Properties property = new Properties();
 
         try {
-            fis = new FileInputStream("C:\\Users\\vilda\\OneDrive\\Рабочий стол\\java\\src\\resources.txt");
+            fis = new FileInputStream("src/resources/config.properties");
             property.load(fis);
             return property.getProperty(key);
 
