@@ -30,9 +30,9 @@ public class Game {
 
 
     public String showHand(){
-        String str = "\n";
+        StringBuilder str = new StringBuilder("\n");
         for(Cards card : hand){
-            str += (card.nameOfCard() + "\n");
+            str.append(card.nameOfCard()).append("\n");
         }
         return "у вас на руке: " + str;
     }

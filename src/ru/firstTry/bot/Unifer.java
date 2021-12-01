@@ -3,10 +3,7 @@ package ru.firstTry.bot;
 import org.javatuples.Pair;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import ru.firstTry.bot.Creators.AnectodesCreator;
-import ru.firstTry.bot.Creators.StartCreator;
-import ru.firstTry.bot.Creators.Treatment;
-import ru.firstTry.bot.Creators.WeatherCreator;
+import ru.firstTry.bot.Creators.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +19,7 @@ public class Unifer {
         list.add(new AnectodesCreator());
         list.add(new WeatherCreator());
         list.add(new StartCreator());
+        list.add(new GameCreator());
     }
 
     public Pair<String, InlineKeyboardMarkup> handleUpdate(Update update) {
