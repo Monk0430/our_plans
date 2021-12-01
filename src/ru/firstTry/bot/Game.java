@@ -4,8 +4,11 @@ import java.util.ArrayList;
 
 public class Game {
 
+
     private final ArrayList<Cards> hand;
-    public Game(Deck deck) {
+    private final Deck deck = new Deck();
+
+    public Game() {
         hand = new ArrayList<Cards>();
         for (int i = 0; i < 2; i++) {
             hand.add(deck.DrawCard());
@@ -13,7 +16,7 @@ public class Game {
         //showHand();
     }
 
-    public String play(Deck deck,String command) {
+    public String play(String command) {
         switch (command) {
             case "посмотреть руку":
                 return showHand();

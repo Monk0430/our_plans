@@ -3,20 +3,25 @@ package ru.firstTry.bot.Creators;
 
 import org.javatuples.Pair;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import ru.firstTry.bot.Deck;
 import ru.firstTry.bot.Game;
 import ru.firstTry.bot.Keyboards;
 
 public class GameCreator implements Treatment {
-    Deck deck;
-    Game newGame;
+    private Game game;
+
     @Override
     public Pair<String, InlineKeyboardMarkup> messageHandling(String data) {
         switch (data) {
+            case "start_game" -> {
+                game = new Game();
+                game.showHand();
+                return new Pair<String, InlineKeyboardMarkup>(
+                        "<b>Сыграем</b>",
+                        Keyboards.getStartGameKeyboard()
+                );
+            }
             case "play" -> {
-                deck = new Deck();
-                newGame = new Game(deck);
-                newGame.showHand();
+                game.showHand();
                 return new Pair<String, InlineKeyboardMarkup>(
                         "<b>Сыграем</b>",
                         Keyboards.getStartGameKeyboard()
@@ -24,19 +29,19 @@ public class GameCreator implements Treatment {
             }
             case "hand" -> {
                 return new Pair<String, InlineKeyboardMarkup>(
-                        newGame.play(deck,"Посмотреть руку"),
+                        game.play("посмотреть руку"),
                         Keyboards.getBackKeyboard("play")
                 );
             }
             case "take" -> {
                 return new Pair<String, InlineKeyboardMarkup>(
-                        newGame.play(deck,"Взять карту"),
+                        game.play("взять карту"),
                         Keyboards.getBackKeyboard("play")
                 );
 
             } case "result" -> {
                 return new Pair<String, InlineKeyboardMarkup>(
-                        newGame.play(deck,"Хватит"),
+                        game.play("хватит"),
                         Keyboards.getBackKeyboard("start")
                 );
             }
@@ -46,6 +51,6 @@ public class GameCreator implements Treatment {
 
     @Override
     public boolean isPossible(String data) {
-        return data.equals("play") || data.equals("hand") || data.equals("take") || data.equals("result");
+        return data.equals("start_game") || data.equals("play") || data.equals("hand") || data.equals("take") || data.equals("result");
     }
 }

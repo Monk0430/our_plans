@@ -12,9 +12,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.sql.SQLException;
 
 public class Handler extends TelegramLongPollingBot {
-    Deck deck;
-    Game newGame;
-    public Unifer unifer = new Unifer();
+    private final Unifer unifer = new Unifer();
 
     @Override
     public String getBotToken() {

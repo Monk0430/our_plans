@@ -12,7 +12,7 @@ public class Keyboards {
         List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
         rowList.add(getButton("Погода", "weather"));
         rowList.add(getButton("Анекдот", "anecdote"));
-        rowList.add(getButton("Играть", "play"));
+        rowList.add(getButton("Играть", "start_game"));
         inlineKeyboardMarkup.setKeyboard(rowList);
 
         return inlineKeyboardMarkup;
