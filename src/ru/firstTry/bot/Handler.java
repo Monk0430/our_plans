@@ -7,12 +7,13 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageTe
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.sql.Array;
 import java.sql.SQLException;
 
 public class Handler extends TelegramLongPollingBot {
     Deck deck;
     Game newGame;
-
+    public Unifer unifer = new Unifer();
 
     @Override
     public String getBotToken() {
@@ -53,8 +54,32 @@ public class Handler extends TelegramLongPollingBot {
                 e.printStackTrace();
             }
         }
-
         if (update.hasCallbackQuery()) {
+            String chatId = update.getCallbackQuery().getMessage().getChatId().toString();
+            Integer messageId = update.getCallbackQuery().getMessage().getMessageId();
+            AnswerCallbackQuery answer = new AnswerCallbackQuery();
+            EditMessageText message = new EditMessageText();
+            message.setChatId(chatId);
+            message.setMessageId(messageId);
+            message.setParseMode("HTML");
+
+            String[] str =unifer.handleUpdate(update);
+            message.setText(str[0]);
+            message.setReplyMarkup(Keyboards.getBackKeyboard(str[1]));
+            try {
+                if (answer.getText() != null)
+                    execute(answer);
+                else
+                    execute(message);
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+}
+        /*if (update.hasCallbackQuery()) {
             String chatId = update.getCallbackQuery().getMessage().getChatId().toString();
             Integer messageId = update.getCallbackQuery().getMessage().getMessageId();
             String data = update.getCallbackQuery().getData();
@@ -108,19 +133,12 @@ public class Handler extends TelegramLongPollingBot {
                     }
                 }
             }
-
-            try {
-                if (answer.getText() != null)
-                    execute(answer);
-                else
-                    execute(message);
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+     */
 
 
 
 
-}
+
+
+
+
