@@ -13,7 +13,7 @@ import ru.firstTry.bot.models.User;
 public class Handler extends TelegramLongPollingBot {
     private final Unifer unifer = new Unifer();
     private final DBHandler dbHandler = new DBHandler();
-    private static String pluralize(int count)
+    public static String pluralize(int count)
     {
         String[] titles = new String[] {"пользователь", "пользователя", "пользователей"};
         int[] cases = new int[] {2, 0, 1, 1, 1, 2};
@@ -35,15 +35,14 @@ public class Handler extends TelegramLongPollingBot {
             SendMessage message = new SendMessage();
             message.setChatId(update.getMessage().getChatId().toString());
             message.setParseMode("HTML");
-            int count_user = dbHandler.getAllUsers().size();
-            message.setText("<b>У нас уже: </b>" + count_user + " " + pluralize(count_user));
-            message.setReplyMarkup(Keyboards.getStartKeyboard());
             long longChatId = update.getMessage().getChatId();
             String userName = update.getMessage().getChat().getUserName();
             String fullName = update.getMessage().getChat().getFirstName() + " "
                     + update.getMessage().getChat().getLastName();
             User user = dbHandler.getOrRegisterUser(longChatId, userName, fullName, 0);
-
+            int count_user = dbHandler.getAllUsers().size();
+            message.setText("<b>У нас уже: </b>" + count_user + " " + pluralize(count_user));
+            message.setReplyMarkup(Keyboards.getStartKeyboard());
 //            try {
 //                DBHandler dbHandler = DBHandler.getInstance();
 //                if (dbHandler.getUserByChatId(longChatId) == null)
