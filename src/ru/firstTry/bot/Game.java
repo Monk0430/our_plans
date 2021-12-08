@@ -13,7 +13,6 @@ public class Game {
         for (int i = 0; i < 2; i++) {
             hand.add(deck.DrawCard());
         }
-        //showHand();
     }
 
     public String play(String command) {
