@@ -33,4 +33,20 @@ public class Requests {
         return response.toString();
     }
 
+    public String getResponceCode(String url) {
+        StringBuffer responseCode = new StringBuffer();
+        try {
+            URL obj = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("User-Agent", USER_AGENT);
+            int response_Code = con.getResponseCode();
+            responseCode.append(response_Code);
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return responseCode.toString();
+    }
+
 }

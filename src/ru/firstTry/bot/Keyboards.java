@@ -14,7 +14,6 @@ public class Keyboards {
         rowList.add(getButton("Анекдот", "anecdote"));
         rowList.add(getButton("Играть", "start_game"));
         inlineKeyboardMarkup.setKeyboard(rowList);
-
         return inlineKeyboardMarkup;
     }
     public static InlineKeyboardMarkup getStartGameKeyboard(){
