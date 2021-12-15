@@ -1,61 +1,77 @@
 package ru.firstTry.bot.models;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table (name = "users")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column(name = "chat_id")
     private long chatId;
-
     private String username;
-
+    @Column(name = "full_name")
     private String fullName;
-
-    private int balance;
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Game> games;
 
     public User() {
-
     }
 
-    public User(long chatId, String username, String fullName, int balance) {
+    public User(long chatId, String username, String fullName) {
         this.chatId = chatId;
         this.username = username;
         this.fullName = fullName;
-        this.balance = balance;
+        games = new ArrayList<>();
     }
 
-    @Id
-    public long getChatId() {
-        return this.chatId;
+    public void addGame(Game game) {
+        game.setUser(this);
+        games.add(game);
     }
 
-    public void setChatId(long chatId) {
-        this.chatId = chatId;
+    public void removeGame(Game game) {
+        games.remove(game);
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getUsername() {
-        return this.username;
+        return username;
     }
 
-    public void setUsername(String name) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
     public String getFullName() {
-        return this.fullName;
+        return fullName;
     }
 
-    public void setFullName(String email) {
+    public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 
-    public int getBalance() {
-        return this.balance;
+    public List<Game> getGames() {
+        return games;
     }
 
-    public void setBalance(int balance) {
-        this.balance = balance;
+    public void setGames(List<Game> games) {
+        this.games = games;
+    }
+
+    @Override
+    public String toString() {
+        return "models.User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", fullName=" + fullName +
+                '}';
     }
 }

@@ -9,16 +9,18 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.firstTry.bot.models.User;
+import ru.firstTry.bot.services.UserService;
 
 public class Handler extends TelegramLongPollingBot {
     private final Unifer unifer = new Unifer();
-    private final DBHandler dbHandler = new DBHandler();
+    private UserService userService = new UserService();
     public static String pluralize(int count)
     {
         String[] titles = new String[] {"пользователь", "пользователя", "пользователей"};
         int[] cases = new int[] {2, 0, 1, 1, 1, 2};
         return titles[count % 100 > 4 && count % 100 < 20 ? 2 : cases[(count % 10 < 5) ? count % 10 : 5]];
     }
+
     @Override
     public String getBotToken() {
         return Config.getValue("bot.token");
@@ -39,17 +41,11 @@ public class Handler extends TelegramLongPollingBot {
             String userName = update.getMessage().getChat().getUserName();
             String fullName = update.getMessage().getChat().getFirstName() + " "
                     + update.getMessage().getChat().getLastName();
-            User user = dbHandler.getOrRegisterUser(longChatId, userName, fullName, 0);
-            int count_user = dbHandler.getAllUsers().size();
+            int count_user = 10;
+            User user = new User(longChatId, userName, fullName);
+            userService.saveUser(user);
             message.setText("<b>У нас уже: </b>" + count_user + " " + pluralize(count_user));
             message.setReplyMarkup(Keyboards.getStartKeyboard());
-//            try {
-//                DBHandler dbHandler = DBHandler.getInstance();
-//                if (dbHandler.getUserByChatId(longChatId) == null)
-//                    dbHandler.addUser(new User(1, longChatId, userName, fullName, 0));
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
 
             try {
                 execute(message);

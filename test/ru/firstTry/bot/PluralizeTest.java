@@ -6,22 +6,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PluralizeTest {
     @Test
-    void test1() {
+    void genitiveCase() {
         Handler handler = new Handler();
         String reply = handler.pluralize(20);
-        assertEquals("пользователей",reply);
+        assertEquals("пользователей", reply);
     }
     @Test
-    void test2() {
+    void nominativeCase() {
         Handler handler = new Handler();
         String reply = handler.pluralize(1);
-        assertEquals("пользователь",reply);
+        assertEquals("пользователь", reply);
     }
     @Test
-    void test3() {
+    void accusativeCase() {
         Handler handler = new Handler();
         String reply = handler.pluralize(22);
-        assertEquals("пользователя",reply);
+        assertEquals("пользователя", reply);
     }
 
 }
