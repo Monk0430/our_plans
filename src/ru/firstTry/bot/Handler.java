@@ -8,12 +8,12 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageTe
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import ru.firstTry.bot.models.User;
-import ru.firstTry.bot.services.UserService;
+
+import java.sql.SQLException;
+
 
 public class Handler extends TelegramLongPollingBot {
-    private final Unifer unifer = new Unifer();
-    private UserService userService = new UserService();
+
     public static String pluralize(int count)
     {
         String[] titles = new String[] {"пользователь", "пользователя", "пользователей"};
@@ -32,6 +32,11 @@ public class Handler extends TelegramLongPollingBot {
     }
 
     @Override
+    public void onClosing() {
+        super.onClosing();
+    }
+
+    @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
             SendMessage message = new SendMessage();
@@ -41,12 +46,18 @@ public class Handler extends TelegramLongPollingBot {
             String userName = update.getMessage().getChat().getUserName();
             String fullName = update.getMessage().getChat().getFirstName() + " "
                     + update.getMessage().getChat().getLastName();
-            int count_user = 10;
-            User user = new User(longChatId, userName, fullName);
-            userService.saveUser(user);
+            int count_user = 0;
+            try {
+                DBHandler dbHandler = DBHandler.getInstance();
+                if (dbHandler.getUserByChatId(longChatId) == null){
+                    dbHandler.addUser(new User(longChatId, userName, fullName, "{}", "{}"));
+                }
+                count_user = dbHandler.getAllUsers().size();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             message.setText("<b>У нас уже: </b>" + count_user + " " + pluralize(count_user));
             message.setReplyMarkup(Keyboards.getStartKeyboard());
-
             try {
                 execute(message);
             } catch (TelegramApiException e) {
@@ -61,7 +72,7 @@ public class Handler extends TelegramLongPollingBot {
             message.setChatId(chatId);
             message.setMessageId(messageId);
             message.setParseMode("HTML");
-
+            Unifer unifer = new Unifer(update.getCallbackQuery().getMessage().getChatId());
             Pair<String, InlineKeyboardMarkup> creator = unifer.handleUpdate(update);
             message.setText(creator.getValue0());
             message.setReplyMarkup(creator.getValue1());

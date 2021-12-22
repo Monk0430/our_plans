@@ -14,12 +14,12 @@ public class Unifer {
 
     private final List<Treatment> list;
 
-    public Unifer(){
+    public Unifer(long chat_id){
         list = new ArrayList<>();
-        list.add(new AnectodesCreator());
+        list.add(new AnecdotesCreator());
         list.add(new WeatherCreator());
         list.add(new StartCreator());
-        list.add(new GameCreator());
+        list.add(new GameCreator(chat_id));
     }
 
     public Pair<String, InlineKeyboardMarkup> handleUpdate(Update update) {

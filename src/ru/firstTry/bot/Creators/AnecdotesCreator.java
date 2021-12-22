@@ -5,7 +5,7 @@ import org.javatuples.Pair;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import ru.firstTry.bot.Keyboards;
 
-public class AnectodesCreator implements Treatment {
+public class AnecdotesCreator implements Treatment {
     @Override
     public Pair<String, InlineKeyboardMarkup> messageHandling(String data) {
         return new Pair<String, InlineKeyboardMarkup>("\"<b>Колобок повесился</b>\"", Keyboards.getBackKeyboard("start"));

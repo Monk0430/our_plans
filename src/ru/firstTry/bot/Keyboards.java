@@ -19,9 +19,8 @@ public class Keyboards {
     public static InlineKeyboardMarkup getStartGameKeyboard(){
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> gameList = new ArrayList<>();
-        gameList.add(getButton("посмотреть руку", "hand"));
-        gameList.add(getButton("взять карту", "take"));
-        gameList.add(getButton("вскрываемся", "result"));
+        gameList.add(getButton("Взять карту", "take"));
+        gameList.add(getButton("Вскрываемся", "result"));
         inlineKeyboardMarkup.setKeyboard(gameList);
         return inlineKeyboardMarkup;
     }

@@ -7,41 +7,36 @@ import ru.firstTry.bot.Game;
 import ru.firstTry.bot.Keyboards;
 
 public class GameCreator implements Treatment {
-    private Game game;
+    private final long chat_id;
+
+    public GameCreator(long chat_id) {
+        this.chat_id = chat_id;
+    }
 
     @Override
     public Pair<String, InlineKeyboardMarkup> messageHandling(String data) {
         switch (data) {
             case "start_game" -> {
-                game = new Game();
-                game.showHand();
+                Game.start(this.chat_id);
+                String text = Game.showHand(this.chat_id) + "\n" + "<b>Ваш счет:</b> " + Game.scoring(this.chat_id);
                 return new Pair<String, InlineKeyboardMarkup>(
-                        "<b>Сыграем</b>",
+                        text,
                         Keyboards.getStartGameKeyboard()
-                );
-            }
-            case "play" -> {
-                game.showHand();
-                return new Pair<String, InlineKeyboardMarkup>(
-                        "<b>Сыграем</b>",
-                        Keyboards.getStartGameKeyboard()
-                );
-            }
-            case "hand" -> {
-                return new Pair<String, InlineKeyboardMarkup>(
-                        game.play("посмотреть руку"),
-                        Keyboards.getBackKeyboard("play")
                 );
             }
             case "take" -> {
+                Game.getCard(this.chat_id);
+                String text = Game.showHand(this.chat_id) + "\n" + Game.scoring(this.chat_id);
                 return new Pair<String, InlineKeyboardMarkup>(
-                        game.play("взять карту"),
-                        Keyboards.getBackKeyboard("play")
+                        text,
+                        Keyboards.getStartGameKeyboard()
                 );
+            }
 
-            } case "result" -> {
+            case "result" -> {
+                String score = Game.result(this.chat_id);
                 return new Pair<String, InlineKeyboardMarkup>(
-                        game.play("хватит"),
+                        score,
                         Keyboards.getBackKeyboard("start")
                 );
             }
@@ -51,6 +46,7 @@ public class GameCreator implements Treatment {
 
     @Override
     public boolean isPossible(String data) {
-        return data.equals("start_game") || data.equals("play") || data.equals("hand") || data.equals("take") || data.equals("result");
+        return data.equals("start_game") || data.equals("play") ||
+                data.equals("hand") || data.equals("take") || data.equals("result");
     }
 }
