@@ -1,3 +1,0 @@
-bot.token=2081782070:AAEIX26hXzKoKW632OcAftPjU_9U9L5RnMo
-bot.name=our_plans_bot
-weather.token=4fec795d30e972f1082d9c81736071ed
